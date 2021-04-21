@@ -32,6 +32,7 @@ class Woo_Activator {
 	public function activate() {
 		global $wpdb;
 
+		/* CREATE NEW TABLE */
 		if($wpdb->get_var("SHOW tables like '" . $this->wp_woo_bet() . "'") != $this->wp_woo_bet()){
 			$table_query="CREATE TABLE IF NOT EXISTS `" . $this->wp_woo_bet() . "` (
 				`id` int(11) NOT NULL AUTO_INCREMENT,
@@ -44,12 +45,16 @@ class Woo_Activator {
 
 			require_once(ABSPATH.'wp-admin/includes/upgrade.php');
 			dbDelta($table_query);
+
+			/* INSERT DATA FROM DATABASE */
+			$insert_query = "INSERT into " . $this->wp_woo_bet() . "(name, price, status) VALUES ('Item 1', 240, 1), ('Item 2', 245, 1)";
+			$wpdb->query($insert_query);
 		}
 	}
 
 	public function wp_woo_bet(){
 		global $wpdb;
-		return $wpdb->prefix."woo_bet";
+		return $wpdb->prefix."woo_bet"; //prefix in the database
 	}
 
 }

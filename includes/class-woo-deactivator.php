@@ -29,8 +29,11 @@ class Woo_Deactivator {
 	 *
 	 * @since    1.0.0
 	 */
-	public static function deactivate() {
+	public function deactivate() {
+		global $wpdb;
 
+		/* REMOVE TABLE FROM DATABASE */
+		$wpdb->query("DROP TABLE IF EXISTS wp_woo_bet");
 	}
 
 }

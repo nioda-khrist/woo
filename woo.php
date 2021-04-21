@@ -53,7 +53,8 @@ function activate_woo() {
  */
 function deactivate_woo() {
 	require_once plugin_dir_path( __FILE__ ) . 'includes/class-woo-deactivator.php';
-	Woo_Deactivator::deactivate();
+	$deactivator = new Woo_Deactivator();
+	$deactivator->deactivate();
 }
 
 register_activation_hook( __FILE__, 'activate_woo' );
