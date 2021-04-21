@@ -43,7 +43,8 @@ define( 'WOO_VERSION', '1.0.0' );
  */
 function activate_woo() {
 	require_once plugin_dir_path( __FILE__ ) . 'includes/class-woo-activator.php';
-	Woo_Activator::activate();
+	$activator = new Woo_Activator();
+	$activator->activate();
 }
 
 /**

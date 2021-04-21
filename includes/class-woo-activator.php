@@ -29,8 +29,27 @@ class Woo_Activator {
 	 *
 	 * @since    1.0.0
 	 */
-	public static function activate() {
+	public function activate() {
+		global $wpdb;
 
+		if($wpdb->get_var("SHOW tables like '" . $this->wp_woo_bet() . "'") != $this->wp_woo_bet()){
+			$table_query="CREATE TABLE IF NOT EXISTS `" . $this->wp_woo_bet() . "` (
+				`id` int(11) NOT NULL AUTO_INCREMENT,
+				`name` varchar(150) NOT NULL,
+				`price` int(11) NOT NULL,
+				`status` int(11) NOT NULL DEFAULT '1',
+				`created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+				PRIMARY KEY (`id`)
+			) ENGINE=MyISAM DEFAULT CHARSET=latin1";
+
+			require_once(ABSPATH.'wp-admin/includes/upgrade.php');
+			dbDelta($table_query);
+		}
+	}
+
+	public function wp_woo_bet(){
+		global $wpdb;
+		return $wpdb->prefix."woo_bet";
 	}
 
 }
