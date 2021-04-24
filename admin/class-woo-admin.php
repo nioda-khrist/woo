@@ -100,4 +100,24 @@ class Woo_Admin {
 
 	}
 
+	// Create menu function
+	public function ticket_menu(){
+		// hook that creates the main menu
+		add_menu_page( "Ticket Reservation", "Ticket Reservation", "manage_options", "ticket-reservation", array( $this, "ticket_dashboard" ), "dashicons-cloud-saved", 40 );
+
+		// function that goes to first menu list
+		add_submenu_page( "ticket-reservation", "Reservation", "Reservation", "manage_options", "ticket-reservation", array( $this, "ticket_dashboard"));
+
+		// function that creates second menu list
+		add_submenu_page( "ticket-reservation", "List", "List", "manage_options", "ticket-list", array($this, "ticket_list"), 5 );
+	}
+
+	public function ticket_dashboard(){
+		echo "<h4>hello</h4>";
+	}
+
+	public function ticket_list(){
+		echo "ticket list";
+	}
+
 }

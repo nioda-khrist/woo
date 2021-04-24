@@ -156,7 +156,9 @@ class Woo {
 
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
-
+		
+		// create admin menu
+		$this->loader->add_action( 'admin_menu', $plugin_admin, 'ticket_menu' );
 	}
 
 	/**
