@@ -43,7 +43,9 @@ define( 'WOO_VERSION', '1.0.0' );
  */
 function activate_woo() {
 	require_once plugin_dir_path( __FILE__ ) . 'includes/class-woo-activator.php';
+	// create a new instance of a class
 	$activator = new Woo_Activator();
+	// with this new instance . activate the function
 	$activator->activate();
 }
 
@@ -52,8 +54,16 @@ function activate_woo() {
  * This action is documented in includes/class-woo-deactivator.php
  */
 function deactivate_woo() {
+	// import the file
+	require_once plugin_dir_path( __FILE__ ) . 'includes/class-woo-activator.php';
+	// create a new instance of the class
+	$activator = new Woo_Activator();
+
+	// import the file 
 	require_once plugin_dir_path( __FILE__ ) . 'includes/class-woo-deactivator.php';
-	$deactivator = new Woo_Deactivator();
+	// create a new instance of the class with the activator class parameter
+	$deactivator = new Woo_Deactivator($activator);
+	// call the activate function
 	$deactivator->deactivate();
 }
 

@@ -52,6 +52,7 @@ class Woo_Activator {
 		}
 	}
 
+	// create a name so we don't have to replicate each name
 	public function wp_woo_bet(){
 		global $wpdb;
 		return $wpdb->prefix."woo_bet"; //prefix in the database

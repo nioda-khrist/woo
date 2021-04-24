@@ -29,11 +29,19 @@ class Woo_Deactivator {
 	 *
 	 * @since    1.0.0
 	 */
+	// create a variable to hold the parameter
+	private $table_activator;
+
+	// create a constructor to accept child or parameters
+	public function __construct($activator){
+		$this->$table_activator = $activator;
+	}
+
 	public function deactivate() {
 		global $wpdb;
 
 		/* REMOVE TABLE FROM DATABASE */
-		$wpdb->query("DROP TABLE IF EXISTS wp_woo_bet");
+		$wpdb->query("DROP TABLE IF EXISTS " . $this->$table_activator->wp_woo_bet());
 	}
 
 }
