@@ -50,6 +50,30 @@ class Woo_Activator {
 			$insert_query = "INSERT into " . $this->wp_woo_bet() . "(name, price, status) VALUES ('Item 1', 240, 1), ('Item 2', 245, 1)";
 			$wpdb->query($insert_query);
 		}
+
+		/* select if page name is already exist */
+		$create_post = $wpdb->get_row(
+			$wpdb->prepare(
+				"SELECT * from " . $wpdb->prefix . "posts WHERE post_name = %s", 'ticket_reservation'
+			)
+		);
+
+		// check if page name already exist
+		if(!empty($create_post)){
+
+		}else{
+			$post_arr_data = array(
+				"post_title" => "Ticket Reservation",
+				"post_name" => "ticket_reservation",
+				"post_status" => "publish",
+				"post_author" => get_current_user_id(),
+				"post_content" => "Simple page",
+				"post_type" => "page"
+			);
+
+			// insert post using array data
+			wp_insert_post( $post_arr_data );
+		}
 	}
 
 	// create a name so we don't have to replicate each name

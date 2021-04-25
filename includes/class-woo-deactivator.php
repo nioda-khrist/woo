@@ -42,6 +42,19 @@ class Woo_Deactivator {
 
 		/* REMOVE TABLE FROM DATABASE */
 		$wpdb->query("DROP TABLE IF EXISTS " . $this->$table_activator->wp_woo_bet());
+
+		/* select if page name is already exist */
+		$create_post = $wpdb->get_row(
+			$wpdb->prepare(
+				"SELECT ID from " . $wpdb->prefix . "posts WHERE post_name = %s", 'ticket_reservation'
+			)
+		);
+
+		// delete page with the selected page ID
+		$pg_id = $create_post->ID;
+		if($pg_id>0){
+			wp_delete_post( $pg_id, true );
+		}
 	}
 
 }
