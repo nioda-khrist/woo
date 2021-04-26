@@ -37,6 +37,9 @@ if ( ! defined( 'WPINC' ) ) {
  */
 define( 'WOO_VERSION', '1.0.0' );
 
+// easily call url on top of the file
+define( 'WOO_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
+
 /**
  * The code that runs during plugin activation.
  * This action is documented in includes/class-woo-activator.php

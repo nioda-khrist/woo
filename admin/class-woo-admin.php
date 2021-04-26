@@ -75,6 +75,13 @@ class Woo_Admin {
 
 		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/woo-admin.css', array(), $this->version, 'all' );
 
+		// enqueue style only on specific pages
+		$valid_pages = array("ticket-reservation","ticket-list");
+		$page = isset($_REQUEST['page']) ? $_REQUEST['page'] : "";
+
+		if(in_array($page,$valid_pages)){
+			wp_enqueue_style( "woo-styles", WOO_PLUGIN_URL . 'assets/css/styling.css', array(), $this->version, 'all' );
+		}
 	}
 
 	/**
