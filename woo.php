@@ -37,7 +37,7 @@ if ( ! defined( 'WPINC' ) ) {
  */
 define( 'WOO_VERSION', '1.0.0' );
 
-// easily call url on top of the file
+// create constant to create path to the main url
 define( 'WOO_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 
 /**

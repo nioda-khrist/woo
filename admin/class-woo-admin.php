@@ -91,17 +91,20 @@ class Woo_Admin {
 	 */
 	public function enqueue_scripts() {
 
-		/**
-		 * This function is provided for demonstration purposes only.
-		 *
-		 * An instance of this class should be passed to the run() function
-		 * defined in Woo_Loader as all of the hooks are defined
-		 * in that particular class.
-		 *
-		 * The Woo_Loader will then create the relationship
-		 * between the defined hooks and the functions defined in this
-		 * class.
-		 */
+		// enqueue style only on specific pages
+		$valid_pages = array("ticket-reservation","ticket-list");
+		$page = isset($_REQUEST['page']) ? $_REQUEST['page'] : "";
+
+		if(in_array($page,$valid_pages)){
+			// Load jquery and make it dependency
+			wp_enqueue_script( "jquery" );
+			wp_enqueue_script( "woo-scripts", WOO_PLUGIN_URL . 'assets/js/scripts.js', array( 'jquery' ), $this->version, false );
+
+			// Add some javascript variable inside the page
+			wp_localize_script( $this->plugin_name, "woo_js", array(
+				"ajax_url" => admin_url("admin-ajax.php"),
+			));
+		}
 
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/woo-admin.js', array( 'jquery' ), $this->version, false );
 
