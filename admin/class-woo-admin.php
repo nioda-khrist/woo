@@ -127,7 +127,18 @@ class Woo_Admin {
 	}
 
 	public function ticket_list(){
-		echo "ticket list";
+		// create a buffer
+		ob_start();
+
+		// include the template file
+		include_once(WOO_PLUGIN_PATH . "admin/partials/woo-admin-display.php"); // -> store content to buffer
+
+		// read content
+		$template = ob_get_contents();
+
+		// end buffer
+		ob_end_clean();
+		echo $template;
 	}
 
 }
