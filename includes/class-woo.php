@@ -159,6 +159,11 @@ class Woo {
 		
 		// create admin menu
 		$this->loader->add_action( 'admin_menu', $plugin_admin, 'ticket_menu' );
+
+		// action hook for ajax
+		// wp_ajax_[JS-NAME-REQUEST]
+		$this->loader->add_action( 'wp_ajax_admin_add_ajax', $plugin_admin, 'handle_ajax_admin' );
+
 	}
 
 	/**

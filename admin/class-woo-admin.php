@@ -101,8 +101,8 @@ class Woo_Admin {
 			wp_enqueue_script( "woo-scripts", WOO_PLUGIN_URL . 'assets/js/scripts.js', array( 'jquery' ), $this->version, false );
 
 			// Add some javascript variable inside the page
-			wp_localize_script( $this->plugin_name, "woo_js", array(
-				"ajax_url" => admin_url("admin-ajax.php"),
+			wp_localize_script( "jquery", "woo_js", array(
+				"ajaxURL" => admin_url("admin-ajax.php"),
 			));
 		}
 
@@ -139,6 +139,30 @@ class Woo_Admin {
 		// end buffer
 		ob_end_clean();
 		echo $template;
+	}
+
+	public function handle_ajax_admin(){
+
+		// handle ajax
+		$param = isset($_REQUEST['param']) ? $_REQUEST['param'] : "";
+
+		if(!empty($param)){
+
+			if($param == 'first_ajax'){
+
+				echo json_encode(array(
+					"status" => 1,
+					"message" => "FIRST AJAX",
+					"data" => array(
+						"name" => "Joukan"
+					)
+				));
+
+			}
+
+		}
+
+		wp_die();
 	}
 
 }

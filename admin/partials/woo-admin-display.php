@@ -15,3 +15,5 @@
 
 <!-- This file should primarily consist of HTML with a little bit of PHP. -->
 <h5>AWESOMESS</h5>
+<!-- SEND AJAX REQUEST -->
+<button id="ajax-request">SEND AJAX</button>
