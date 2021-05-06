@@ -31,6 +31,9 @@ class Woo_Admin {
 	 */
 	private $plugin_name;
 
+	// create a variable to hold the parameter
+	private $table_content;
+
 	/**
 	 * The version of this plugin.
 	 *
@@ -51,6 +54,11 @@ class Woo_Admin {
 
 		$this->plugin_name = $plugin_name;
 		$this->version = $version;
+
+		require_once WOO_PLUGIN_PATH . 'includes/class-woo-activator.php';
+		// create a new instance of the class
+		$activator = new Woo_Activator();
+		$this->table_content = $activator;
 
 	}
 
@@ -143,6 +151,8 @@ class Woo_Admin {
 
 	public function handle_ajax_admin(){
 
+		global $wpdb;
+
 		// handle ajax
 		$param = isset($_REQUEST['param']) ? $_REQUEST['param'] : "";
 
@@ -158,6 +168,11 @@ class Woo_Admin {
 					)
 				));
 
+			}elseif($param == 'second_ajax'){
+				print_r($_REQUEST);
+				$fname = $_REQUEST['fname'] ?: "";
+				$lname = $_REQUEST['lname'] ?: "";
+				
 			}
 
 		}
